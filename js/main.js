@@ -8,3 +8,18 @@ const getRandomNumber = function (min, max) {
 };
 
 getRandomNumber(0, 100);
+
+const commentField = document.querySelector('.text__description');
+
+const getMaxLengthString = function (verifiableString, maxLength) {
+  verifiableString.oninput = function () {
+    if (verifiableString.value.length <= maxLength) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  };
+};
+
+getMaxLengthString(commentField, 140);
