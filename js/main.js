@@ -1,20 +1,3 @@
-//Информация взята с MDN https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-const getRandomNumber = function (min, max) {
-  if (min >= 0 && max > min) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-};
-
-getRandomNumber(0, 100);
-
-const getMaxLengthString = function (verifiableString, maxLength) {
-  return verifiableString.length <= maxLength;
-};
-
-getMaxLengthString('string', 10);
-
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -33,34 +16,66 @@ const USER_NAMES = [
   'Дмитрий',
 ];
 
-const OBJECTS_LENGTH = 25;
+const FOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH = 25;
 
-const commentsId = Array.from({length: 25}, (v, i) => ++i);
+const URL_PHOTOS_RANDOM_NUMBER_MIN = 1;
+
+const URL_PHOTOS_RANDOM_NUMBER_MAX = 25;
+
+const LIKES_RANDOM_NUMBER_MIN = 15;
+
+const LIKES_RANDOM_NUMBER_MAX = 200;
+
+const AVATAR_IMAGE_RANDOM_NUMBER_MIN = 1;
+
+const AVATAR_IMAGE_RANDOM_NUMBER_MAX = 6;
+
+const COMMENTS_ID_ARRAY_LENGTH = 25;
+
+//Информация взята с MDN https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+const getRandomNumber = function (min, max) {
+  if (min >= 0 && max > min) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+};
+
+getRandomNumber(0, 100);
+
+const getMaxLengthString = function (verifiableString, maxLength) {
+  return verifiableString.length <= maxLength;
+};
+
+getMaxLengthString('string', 10);
+
+const commentsId = Array.from({length: COMMENTS_ID_ARRAY_LENGTH}, (v, i) => ++i);
 const getCommentsId = function () {
   const commentId = commentsId.splice(getRandomNumber(0, commentsId.length - 1), 1);
   return `${commentId}`;
 };
 
-const usersId = Array.from({length: 25}, (v, i) => ++i);
-const getUsersId = function () {
-  const userId = usersId.splice(getRandomNumber(0, usersId.length - 1), 1);
-  return `${userId}`;
+let userId = 0;
+
+const getUserId = function () {
+  userId++;
+  return userId;
 };
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 const CreateUserPhotoDescription = () => ({
-  id:getCommentsId(),
-  url:`photos/${ getRandomNumber(1, 25)  }.jpg`,
+  id:getUserId(),
+  url:`photos/${ getRandomNumber(URL_PHOTOS_RANDOM_NUMBER_MIN, URL_PHOTOS_RANDOM_NUMBER_MAX)  }.jpg`,
   description:'Фотография кота',
-  likes:getRandomNumber(12, 200),
+  likes:getRandomNumber(LIKES_RANDOM_NUMBER_MIN, LIKES_RANDOM_NUMBER_MAX),
   comments:[{
-    id:getUsersId(),
-    avatar:`img/avatar-${  getRandomNumber(1, 6)  }.svg`,
+    id:Number(getCommentsId()),
+    avatar:`img/avatar-${  getRandomNumber(AVATAR_IMAGE_RANDOM_NUMBER_MIN, AVATAR_IMAGE_RANDOM_NUMBER_MAX)  }.svg`,
     message:getRandomArrayElement(MESSAGES),
     name:getRandomArrayElement(USER_NAMES),
   }
   ]
 });
 
-Array.from({length: OBJECTS_LENGTH}, CreateUserPhotoDescription);
+Array.from({length: FOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH}, CreateUserPhotoDescription);
