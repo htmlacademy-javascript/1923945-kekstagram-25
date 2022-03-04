@@ -1,4 +1,4 @@
-const MESSAGES = [
+const COMMENTS_MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -7,7 +7,7 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const USER_NAMES = [
+const COMMENTS_USER_NAME = [
   'Иван',
   'Сергей',
   'Александр',
@@ -49,11 +49,24 @@ const getMaxLengthString = function (verifiableString, maxLength) {
 
 getMaxLengthString('string', 10);
 
-const commentsId = Array.from({length: COMMENTS_ID_ARRAY_LENGTH}, (v, i) => ++i);
-const getCommentsId = function () {
-  const commentId = commentsId.splice(getRandomNumber(0, commentsId.length - 1), 1);
-  return `${commentId}`;
-};
+const arrayIds = [];
+
+for ( let i = 1; i <= COMMENTS_ID_ARRAY_LENGTH; i++ ) {
+  arrayIds.push(i);
+}
+
+function shuffle(arr){
+  let j, temp;
+  for(let i = arr.length - 1; i > 0; i--){
+    j = Math.floor(Math.random()*(i + 1));
+    temp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = temp;
+  }
+  return arr;
+}
+
+const shuffleArr = shuffle(arrayIds);
 
 let userId = 0;
 
@@ -64,18 +77,24 @@ const getUserId = function () {
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-const CreateUserPhotoDescription = () => ({
-  id:getUserId(),
-  url:`photos/${ getRandomNumber(URL_PHOTOS_RANDOM_NUMBER_MIN, URL_PHOTOS_RANDOM_NUMBER_MAX)  }.jpg`,
-  description:'Фотография кота',
-  likes:getRandomNumber(LIKES_RANDOM_NUMBER_MIN, LIKES_RANDOM_NUMBER_MAX),
-  comments:[{
-    id:Number(getCommentsId()),
-    avatar:`img/avatar-${  getRandomNumber(AVATAR_IMAGE_RANDOM_NUMBER_MIN, AVATAR_IMAGE_RANDOM_NUMBER_MAX)  }.svg`,
-    message:getRandomArrayElement(MESSAGES),
-    name:getRandomArrayElement(USER_NAMES),
-  }
-  ]
-});
+let idRandomElement = 0;
+
+const CreateUserPhotoDescription = () => {
+  const userName = getRandomArrayElement(COMMENTS_USER_NAME);
+  idRandomElement++;
+  return {
+    id:getUserId(),
+    url:`photos/${ getRandomNumber(URL_PHOTOS_RANDOM_NUMBER_MIN, URL_PHOTOS_RANDOM_NUMBER_MAX)  }.jpg`,
+    description:`Фотография кота от ${  userName}`,
+    likes:getRandomNumber(LIKES_RANDOM_NUMBER_MIN, LIKES_RANDOM_NUMBER_MAX),
+    comments:[{
+      id:shuffleArr[idRandomElement],
+      avatar:`img/avatar-${  getRandomNumber(AVATAR_IMAGE_RANDOM_NUMBER_MIN, AVATAR_IMAGE_RANDOM_NUMBER_MAX)  }.svg`,
+      message:getRandomArrayElement(COMMENTS_MESSAGES),
+      name:userName,
+    }
+    ]
+  };
+};
 
 Array.from({length: FOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH}, CreateUserPhotoDescription);
