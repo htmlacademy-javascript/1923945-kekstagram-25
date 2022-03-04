@@ -16,11 +16,21 @@ const COMMENTS_USER_NAME = [
   'Дмитрий',
 ];
 
-const FOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH = 25;
+const PHOTO_DESCRIPTION_FIRST_PHRASE = [
+  'Фотография',
+  'Изображение',
+  'Картинка',
+  'Рисунок',
+  'Портрет',
+];
 
-const URL_PHOTOS_RANDOM_NUMBER_MIN = 1;
+const PHOTO_DESCRIPTION_SECOND_PHRASE = [
+  'кота',
+  'кошки',
+  'котёнка',
+];
 
-const URL_PHOTOS_RANDOM_NUMBER_MAX = 25;
+const PHOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH = 25;
 
 const LIKES_RANDOM_NUMBER_MIN = 15;
 
@@ -31,6 +41,10 @@ const AVATAR_IMAGE_RANDOM_NUMBER_MIN = 1;
 const AVATAR_IMAGE_RANDOM_NUMBER_MAX = 6;
 
 const COMMENTS_ID_ARRAY_LENGTH = 25;
+
+const COMMENTS_RANDOM_NUMBER_MIN = 1;
+
+const COMMENTS_RANDOM_NUMBER_MAX = 6;
 
 //Информация взята с MDN https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const getRandomNumber = function (min, max) {
@@ -68,33 +82,35 @@ function shuffle(arr){
 
 const shuffleArr = shuffle(arrayIds);
 
-let userId = 0;
-
-const getUserId = function () {
-  userId++;
-  return userId;
-};
-
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-let idRandomElement = 0;
+const getImageDescripton = (userName) => {
+  const firstPhrase = getRandomArrayElement(PHOTO_DESCRIPTION_FIRST_PHRASE);
+  const secondPhrase = getRandomArrayElement(PHOTO_DESCRIPTION_SECOND_PHRASE);
+  return `${firstPhrase} ${secondPhrase} - разместил ${userName}`;
+};
 
-const CreateUserPhotoDescription = () => {
+const createComment = (index, userName) => ({
+  id:shuffleArr[index],
+  avatar:`img/avatar-${  getRandomNumber(AVATAR_IMAGE_RANDOM_NUMBER_MIN, AVATAR_IMAGE_RANDOM_NUMBER_MAX)  }.svg`,
+  message:getRandomArrayElement(COMMENTS_MESSAGES),
+  name:userName,
+});
+
+const createUserPhotoDescription = (id) => {
   const userName = getRandomArrayElement(COMMENTS_USER_NAME);
-  idRandomElement++;
   return {
-    id:getUserId(),
-    url:`photos/${ getRandomNumber(URL_PHOTOS_RANDOM_NUMBER_MIN, URL_PHOTOS_RANDOM_NUMBER_MAX)  }.jpg`,
-    description:`Фотография кота от ${  userName}`,
+    id:id+1,
+    url:`photos/${ id+1  }.jpg`,
+    description:getImageDescripton(userName),
     likes:getRandomNumber(LIKES_RANDOM_NUMBER_MIN, LIKES_RANDOM_NUMBER_MAX),
-    comments:[{
-      id:shuffleArr[idRandomElement],
-      avatar:`img/avatar-${  getRandomNumber(AVATAR_IMAGE_RANDOM_NUMBER_MIN, AVATAR_IMAGE_RANDOM_NUMBER_MAX)  }.svg`,
-      message:getRandomArrayElement(COMMENTS_MESSAGES),
-      name:userName,
-    }
-    ]
+    comments:Array.from({length: getRandomNumber(COMMENTS_RANDOM_NUMBER_MIN, COMMENTS_RANDOM_NUMBER_MAX)},(value, index)=> createComment(index, userName))
   };
 };
 
-Array.from({length: FOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH}, CreateUserPhotoDescription);
+const createCardDescription = (quanity) => Array.from({ length: quanity}, (value, index) => createUserPhotoDescription(index));
+
+
+createCardDescription(PHOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH);
+
+
