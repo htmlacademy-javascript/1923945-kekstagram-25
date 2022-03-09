@@ -1,4 +1,4 @@
-import {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement} from './utils.js';
+import {getRandomNumber, getShuffleArray, getRandomArrayElement} from './utils.js';
 
 const COMMENTS_MESSAGES = [
   'Всё отлично!',
@@ -31,8 +31,6 @@ const PHOTO_DESCRIPTION_SECOND_PHRASE = [
   'кошки',
   'котёнка',
 ];
-
-const PHOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH = 25;
 
 const LIKES_RANDOM_NUMBER_MIN = 15;
 
@@ -82,6 +80,4 @@ const createUserPhotoDescription = (id) => {
 
 const createCardDescription = (quanity) => Array.from({ length: quanity}, (value, index) => createUserPhotoDescription(index));
 
-createCardDescription(PHOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH);
-
-getMaxLengthString('string', 10);
+export {createCardDescription};
