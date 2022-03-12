@@ -1,5 +1,6 @@
 import {createCardDescription} from './data.js';
 import {getMaxLengthString} from './utils.js';
+import './gallery.js';
 
 const PHOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH = 25;
 
