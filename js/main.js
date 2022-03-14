@@ -1,11 +1,10 @@
 import {createCardDescription} from './data.js';
 import {getMaxLengthString} from './utils.js';
-import './gallery.js';
-
-const PHOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH = 25;
+import {createRecentUsersGalleryItem} from './gallery.js';
 
 const MAX_LENGTH_STRING = 10;
-
-createCardDescription(PHOTO_DESCRIPTION_ARRAY_OBJECTS_LENGTH);
+const USERS_GALLERY_ITEMS_QUANTITY = 25;
 
 getMaxLengthString('string', MAX_LENGTH_STRING);
+
+createRecentUsersGalleryItem(createCardDescription(USERS_GALLERY_ITEMS_QUANTITY));
