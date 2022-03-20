@@ -5,10 +5,11 @@ const inputFile = form.querySelector('.img-upload__input');
 const imageUploadOverlay = form.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
 const hashtagInput = form.querySelector('.text__hashtags');
+const descriptionInput = form.querySelector('.text__description');
 
 //запрет закрытия формы по ESC при фокусе на хэштеге
 const onUserFormEscKeydown = (evt) => {
-  if(isEscapeKey(evt) && document.activeElement !== hashtagInput) {
+  if(isEscapeKey(evt) && document.activeElement !== hashtagInput && document.activeElement !== descriptionInput) {
     evt.preventDefault();
     closeForm ();
   }
