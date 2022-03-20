@@ -36,3 +36,17 @@ function closeForm () {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onUserFormEscKeydown);
 }
+
+//validate hashtag
+
+form.addEventListener('submit', function (evt) {
+  let stringValue = hashtagInput.value.toLocaleLowerCase();
+  const arrayFromString = stringValue.split(' ');
+  const setFromArray = new Set(arrayFromString);
+  const getCheckRepeat = () => arrayFromString.length === setFromArray.size && setFromArray.size < 6;
+  if(!getCheckRepeat()) {
+    evt.preventDefault();
+  }
+})
+
+
