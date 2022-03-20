@@ -19,6 +19,9 @@ const getShuffleArray = (arr) => {
   return arr;
 };
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-export {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement};
+export {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement, isEscapeKey};
+
