@@ -7,7 +7,7 @@ const closeButton = form.querySelector('.img-upload__cancel');
 const hashtagInput = form.querySelector('.text__hashtags');
 const descriptionInput = form.querySelector('.text__description');
 
-//запрет закрытия формы по ESC при фокусе на хэштеге
+//отключение закрытия формы по ESC при фокусе на хэштеге или на комментарии
 const onUserFormEscKeydown = (evt) => {
   if(isEscapeKey(evt) && document.activeElement !== hashtagInput && document.activeElement !== descriptionInput) {
     evt.preventDefault();
@@ -37,16 +37,5 @@ function closeForm () {
   document.removeEventListener('keydown', onUserFormEscKeydown);
 }
 
-//validate hashtag
-
-form.addEventListener('submit', function (evt) {
-  let stringValue = hashtagInput.value.toLocaleLowerCase();
-  const arrayFromString = stringValue.split(' ');
-  const setFromArray = new Set(arrayFromString);
-  const getCheckRepeat = () => arrayFromString.length === setFromArray.size && setFromArray.size < 6;
-  if(!getCheckRepeat()) {
-    evt.preventDefault();
-  }
-})
-
+export {form, hashtagInput, descriptionInput};
 
