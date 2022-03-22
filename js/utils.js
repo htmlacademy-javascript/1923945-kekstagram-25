@@ -6,7 +6,7 @@ const getRandomNumber = (min, max) => {
   }
 };
 
-const getMaxLengthString = (verifiableString, maxLength) => verifiableString.length <= maxLength;
+const getMaxLengthString = (verifiableString, maxLength) => verifiableString.length < maxLength;
 
 const getShuffleArray = (arr) => {
   let j, temp;
@@ -23,5 +23,24 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-export {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement, isEscapeKey};
+const getArrayFromString = (inputField) => {
+  const stringValue = inputField.value.replace(/ +/g, ' ').trim().toLocaleLowerCase();
+  return stringValue.split(' ');
+};
+
+const getLongestWordInArray = (arr) => {
+  let longestWord = 0;
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i].length > longestWord){
+      longestWord = arr[i].length;
+    }
+  }
+  return longestWord;
+};
+
+const getSetFromArray = (array) => new Set(array);
+
+const getPatternConformity = (pattern, value) => pattern.test(value);
+
+export {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement, isEscapeKey, getArrayFromString, getSetFromArray, getLongestWordInArray, getPatternConformity};
 
