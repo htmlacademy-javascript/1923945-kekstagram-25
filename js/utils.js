@@ -23,8 +23,8 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-const getArrayFromString = (value) => {
-  const stringValue = value.value.replace(/ +/g, ' ').trim().toLocaleLowerCase();
+const getArrayFromString = (string) => {
+  const stringValue = string.replace(/ +/g, ' ').trim().toLocaleLowerCase();
   return stringValue.split(' ');
 };
 

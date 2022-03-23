@@ -8,9 +8,9 @@ const hashtagPattern = /^(#[A-Za-zА-Яа-яЁё0-9]+[\s+]*)*$/;
 const symbolsCounter = document.querySelector('.symbols-counter');
 
 const getHashtagPatternConformity = () => hashtagPattern.test(hashtagInput.value);
-const getHashtagRepeat = () => getArrayFromString(hashtagInput).length === new Set((getArrayFromString(hashtagInput))).size;
-const getHashtagQuantity = () => new Set((getArrayFromString(hashtagInput))).size <= MAX_HASHTAG_QUANTITY;
-const getHashtagLength = () => getLongestWordInArray((getArrayFromString(hashtagInput))) <= MAX_HASHTAG_LENGTH ;
+const getHashtagRepeat = () => getArrayFromString(hashtagInput.value).length === new Set((getArrayFromString(hashtagInput.value))).size;
+const getHashtagQuantity = () => new Set((getArrayFromString(hashtagInput.value))).size <= MAX_HASHTAG_QUANTITY;
+const getHashtagLength = () => getLongestWordInArray((getArrayFromString(hashtagInput.value))) <= MAX_HASHTAG_LENGTH ;
 
 const pristine = new Pristine(form, {classTo: 'img-upload__text-field', errorTextParent: 'img-upload__text-field'});
 
