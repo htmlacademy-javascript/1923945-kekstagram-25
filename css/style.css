@@ -1403,3 +1403,29 @@ main {
 .hidden {
   display: none;
 }
+
+/*сообщение об ошибке валидности - Pristine JS */
+.pristine-error {
+  position: relative;
+  top: -18px;
+  width: 450px;
+  margin: 0 auto;
+  display: block;
+  padding: 0 10px;
+  background-color: rgba(255,255,255, 0.8);
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  color: #FF0000;
+  font-size: 13px;
+  text-transform: none;
+}
+
+/*счетчик символов в комментарии*/
+.text__description-text-counter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: #ffffff;
+  font-size: 12px;
+  text-transform: lowercase;
+}
