@@ -23,8 +23,8 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-const getArrayFromString = (inputField) => {
-  const stringValue = inputField.value.replace(/ +/g, ' ').trim().toLocaleLowerCase();
+const getArrayFromString = (value) => {
+  const stringValue = value.value.replace(/ +/g, ' ').trim().toLocaleLowerCase();
   return stringValue.split(' ');
 };
 
@@ -38,9 +38,5 @@ const getLongestWordInArray = (arr) => {
   return longestWord;
 };
 
-const getSetFromArray = (array) => new Set(array);
-
-const getPatternConformity = (pattern, value) => pattern.test(value);
-
-export {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement, isEscapeKey, getArrayFromString, getSetFromArray, getLongestWordInArray, getPatternConformity};
+export {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement, isEscapeKey, getArrayFromString, getLongestWordInArray};
 

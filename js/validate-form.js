@@ -1,14 +1,16 @@
 import {form, hashtagInput, descriptionInput} from './user-form.js';
+import {getArrayFromString, getLongestWordInArray} from './utils.js';
 
-import {getArrayFromString, getSetFromArray, getLongestWordInArray, getPatternConformity} from './utils.js';
+const MAX_HASHTAG_LENGTH = 20;
+const MAX_HASHTAG_QUANTITY = 5;
 
 const hashtagPattern = /^(#[A-Za-zА-Яа-яЁё0-9]+[\s+]*)*$/;
 const symbolsCounter = document.querySelector('.symbols-counter');
 
-const getHashtagPatternConformity = () => getPatternConformity(hashtagPattern, hashtagInput.value);
-const getHashtagRepeat = () => getArrayFromString(hashtagInput).length === getSetFromArray(getArrayFromString(hashtagInput)).size;
-const getHashtagQuantity = () => getSetFromArray(getArrayFromString(hashtagInput)).size <6;
-const getHashtagLength = () => getLongestWordInArray((getArrayFromString(hashtagInput))) < 21;
+const getHashtagPatternConformity = () => hashtagPattern.test(hashtagInput.value);
+const getHashtagRepeat = () => getArrayFromString(hashtagInput).length === new Set((getArrayFromString(hashtagInput))).size;
+const getHashtagQuantity = () => new Set((getArrayFromString(hashtagInput))).size <= MAX_HASHTAG_QUANTITY;
+const getHashtagLength = () => getLongestWordInArray((getArrayFromString(hashtagInput))) <= MAX_HASHTAG_LENGTH ;
 
 const pristine = new Pristine(form, {classTo: 'img-upload__text-field', errorTextParent: 'img-upload__text-field'});
 
