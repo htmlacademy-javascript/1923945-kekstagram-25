@@ -143,13 +143,6 @@ effectList.addEventListener('change', (evt) => {
 effectLevelSlider.noUiSlider.on('update', () => {
   if (effectName !== 'none') {
     previewImage.style.filter = `${filterParams[effectName]['filterName']}(${effectLevelSlider.noUiSlider.get()})`;
-  }
-  if (effectName === 'phobos' || effectName === 'marvin') {
-    effectLevelValue.value = effectLevelSlider.noUiSlider.get().replace(/[^\d;.]/g, '');
-  }
-  else {
-    effectLevelValue.value = effectLevelSlider.noUiSlider.get();
+    effectLevelValue.value = parseFloat(effectLevelSlider.noUiSlider.get());
   }
 });
-
-
