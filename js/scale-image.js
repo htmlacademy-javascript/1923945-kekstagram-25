@@ -28,9 +28,9 @@ function getAssignmentScale(value) {
   imagePreview.style.transform = `scale(${value/100})`;
 }
 
-const resetScale = () => {
+const getResetScale = () => {
   scale = DEFAULT_SCALE;
   getAssignmentScale(scale);
 }
 
-export {resetScale}
+export {getResetScale}

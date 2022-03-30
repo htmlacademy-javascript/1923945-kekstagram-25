@@ -1,5 +1,5 @@
 import {isEscapeKey} from './utils.js';
-import {resetScale} from "./scale-image.js";
+import {getResetScale} from "./scale-image.js";
 
 const form = document.querySelector('.img-upload__form');
 const inputFile = form.querySelector('.img-upload__input');
@@ -47,7 +47,7 @@ function closeForm () {
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onUserFormEscKeydown);
-  resetScale();
+  getResetScale();
 }
 
 export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton, unblockSubmitButton};
