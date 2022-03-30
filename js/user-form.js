@@ -6,6 +6,7 @@ const imageUploadOverlay = form.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
 const hashtagInput = form.querySelector('.text__hashtags');
 const descriptionInput = form.querySelector('.text__description');
+const submitButton = form.querySelector('.img-upload__submit')
 
 //отключение закрытия формы по ESC при фокусе на хэштеге или на комментарии
 const onUserFormEscKeydown = (evt) => {
@@ -25,6 +26,16 @@ closeButton.addEventListener('click', () => {
   closeForm ();
 });
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 function openForm () {
   imageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -37,5 +48,5 @@ function closeForm () {
   document.removeEventListener('keydown', onUserFormEscKeydown);
 }
 
-export {form, hashtagInput, descriptionInput};
+export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton, unblockSubmitButton};
 
