@@ -31,6 +31,6 @@ function getAssignmentScale(value) {
 const getDefaultScale = () => {
   scale = DEFAULT_SCALE;
   getAssignmentScale(scale);
-}
+};
 
 export {getDefaultScale};

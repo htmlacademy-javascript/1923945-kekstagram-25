@@ -1,6 +1,6 @@
 import {isEscapeKey} from './utils.js';
-import {getDefaultScale} from "./scale-image.js";
-import {getDefaultEffects} from "./effect-image.js";
+import {getDefaultScale} from './scale-image.js';
+import {getDefaultEffects} from './effect-image.js';
 
 const form = document.querySelector('.img-upload__form');
 const inputFile = form.querySelector('.img-upload__input');
@@ -8,7 +8,7 @@ const imageUploadOverlay = form.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
 const hashtagInput = form.querySelector('.text__hashtags');
 const descriptionInput = form.querySelector('.text__description');
-const submitButton = form.querySelector('.img-upload__submit')
+const submitButton = form.querySelector('.img-upload__submit');
 
 //отключение закрытия формы по ESC при фокусе на хэштеге или на комментарии
 const onUserFormEscKeydown = (evt) => {
@@ -33,11 +33,6 @@ const blockSubmitButton = () => {
   submitButton.textContent = 'Отправляю...';
 };
 
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Опубликовать';
-};
-
 function openForm() {
   imageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -55,5 +50,5 @@ function closeForm() {
   getDefaultEffects();
 }
 
-export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton, unblockSubmitButton};
+export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton};
 

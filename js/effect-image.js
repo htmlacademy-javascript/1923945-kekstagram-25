@@ -153,6 +153,6 @@ const getDefaultEffects = () => {
   previewImage.removeAttribute('style');
   effectLevelFieldset.hidden = true;
   effectStyleNoneInput.checked = true;
-}
+};
 
 export {getDefaultEffects};
