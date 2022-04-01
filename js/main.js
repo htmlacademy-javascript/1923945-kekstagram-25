@@ -11,9 +11,11 @@ import './effect-image.js';
 import './modal.js';
 
 const MAX_LENGTH_STRING = 10;
+const URL_GET_DATA = 'https://25.javascript.pages.academy/kekstagram/data';
+const URL_SEND_DATA = 'https://25.javascript.pages.academy/kekstagram';
 
 getMaxLengthString('string', MAX_LENGTH_STRING);
 
-getData(createRecentUsersGalleryItem);
+getData(URL_GET_DATA, createRecentUsersGalleryItem);
 
-setUserFormSubmit(closeForm,openModalError, openModalSuccess);
+setUserFormSubmit(URL_SEND_DATA, closeForm, openModalError, openModalSuccess);

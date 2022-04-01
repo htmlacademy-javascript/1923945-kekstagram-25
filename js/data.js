@@ -1,13 +1,13 @@
-const getData = (onSuccess) => {
-  fetch('https://25.javascript.pages.academy/kekstagram/data')
+const getData = (url, onSuccess) => {
+  fetch(url)
     .then((response) => response.json())
     .then((data) => {
       onSuccess(data);
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
-  fetch('https://25.javascript.pages.academy/kekstagram', {
+const sendData = (url, onSuccess, onFail, body) => {
+  fetch(url, {
     method: 'POST',
     body,
   }).then((response) => {

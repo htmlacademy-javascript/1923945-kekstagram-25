@@ -20,12 +20,12 @@ pristine.addValidator(hashtagInput, getHashtagRepeat, 'ХэшТэги не до�
 pristine.addValidator(hashtagInput, getHashtagQuantity, 'Напишите не более пяти Хэштегов');
 pristine.addValidator(hashtagInput, getHashtagLength, 'Длинна одного ХэшТэга не должна превышать 20 символов');
 
-const setUserFormSubmit = (closeForm,openModalError, openModalSuccess) => {
+const setUserFormSubmit = (url, closeForm, openModalError, openModalSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     if (pristine.validate()) {
       blockSubmitButton();
-      sendData(
+      sendData(url,
         () => {
           unblockSubmitButton();
           closeForm();
