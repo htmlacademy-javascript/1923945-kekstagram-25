@@ -88,6 +88,7 @@ const effectList = document.querySelector('.effects__list');
 const previewImage = document.querySelector('.img-upload__preview');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
+const effectStyleNoneInput = document.querySelector('#effect-none');
 
 noUiSlider.create(effectLevelSlider, {
   range: {
@@ -146,3 +147,12 @@ effectLevelSlider.noUiSlider.on('update', () => {
     effectLevelValue.value = parseFloat(effectLevelSlider.noUiSlider.get());
   }
 });
+
+const getDefaultEffects = () => {
+  previewImage.classList.remove('effects__preview--none', 'effects__preview--chrome', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat', 'effects__preview--sepia');
+  previewImage.removeAttribute('style');
+  effectLevelFieldset.hidden = true;
+  effectStyleNoneInput.checked = true;
+};
+
+export {getDefaultEffects};
