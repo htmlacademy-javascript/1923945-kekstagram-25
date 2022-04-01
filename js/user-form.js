@@ -28,21 +28,36 @@ closeButton.addEventListener('click', () => {
   closeForm();
 });
 
+//Функция добавления обработчика закрытие формы по ESC
+const addHandlerUserFormEscapeKey = () => {
+  document.addEventListener('keydown', onUserFormEscKeydown);
+};
+
+//Функция удаления обработчика закрытие формы по ESC
+const removeHandlerUserFormEscapeKey = () => {
+  document.removeEventListener('keydown', onUserFormEscKeydown);
+};
+
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Отправляю...';
 };
 
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 function openForm() {
   imageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onUserFormEscKeydown);
+  addHandlerUserFormEscapeKey();
 }
 
 function closeForm() {
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onUserFormEscKeydown);
+  removeHandlerUserFormEscapeKey();
   inputFile.value = '';
   hashtagInput.value = '';
   descriptionInput.value = '';
@@ -50,5 +65,5 @@ function closeForm() {
   getDefaultEffects();
 }
 
-export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton};
+export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton, unblockSubmitButton, addHandlerUserFormEscapeKey, removeHandlerUserFormEscapeKey};
 

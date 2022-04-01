@@ -1,4 +1,4 @@
-import {form, hashtagInput, descriptionInput, blockSubmitButton} from './user-form.js';
+import {form, hashtagInput, descriptionInput, blockSubmitButton, unblockSubmitButton, removeHandlerUserFormEscapeKey} from './user-form.js';
 import {getArrayFromString, getLongestWordInArray} from './utils.js';
 import {sendData} from './data.js';
 
@@ -27,12 +27,14 @@ const setUserFormSubmit = (closeForm,openModalError, openModalSuccess) => {
       blockSubmitButton();
       sendData(
         () => {
+          unblockSubmitButton();
           closeForm();
           openModalSuccess();
         },
         () => {
-          closeForm();
           openModalError();
+          removeHandlerUserFormEscapeKey();
+          unblockSubmitButton();
         },
         new FormData(evt.target),
       );

@@ -1,4 +1,5 @@
 import {isEscapeKey} from './utils.js';
+import {addHandlerUserFormEscapeKey} from './user-form.js';
 
 const onModalSuccessEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -43,12 +44,12 @@ const openModalError = () => {
 
   modalError.addEventListener('click', (evt) => {
     if (evt.target === modalError) {
-      closeModalSuccess();
+      closeModalError();
     }
   });
 
   errorButton.addEventListener('click', () => {
-    closeModalSuccess();
+    closeModalError();
   });
 };
 
@@ -60,6 +61,7 @@ function closeModalSuccess () {
 function closeModalError () {
   document.body.removeChild(document.body.lastElementChild);
   document.removeEventListener('keydown', onModalErrorEscKeydown);
+  addHandlerUserFormEscapeKey();
 }
 
 
