@@ -9,7 +9,8 @@ import './validate-form.js';
 import './scale-image.js';
 import './effect-image.js';
 import './modal.js';
-
+// import './full-size-image.js'
+// import './gallery.js'
 const MAX_LENGTH_STRING = 10;
 const URL_GET_DATA = 'https://25.javascript.pages.academy/kekstagram/data';
 const URL_SEND_DATA = 'https://25.javascript.pages.academy/kekstagram';
