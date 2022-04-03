@@ -1,7 +1,7 @@
 import {isEscapeKey} from './utils.js';
 
 const bigPicture = document.querySelector('.big-picture');
-const pictureView  = bigPicture.querySelector('.big-picture__img');
+const pictureView = bigPicture.querySelector('.big-picture__img');
 const pictureDescription = bigPicture.querySelector('.social__caption');
 const pictureCancelButton = bigPicture.querySelector('#picture-cancel');
 const fullPicture = pictureView.querySelector('img');
@@ -10,6 +10,7 @@ const commentsCount = bigPicture.querySelector('.comments-count');
 const socialComments = bigPicture.querySelector('.social__comments');
 const socialCommentsCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoaderButton = bigPicture.querySelector('.comments-loader');
+const socialComment = socialComments.querySelector('.social__comment');
 
 const onFullSizePictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -17,23 +18,17 @@ const onFullSizePictureEscKeydown = (evt) => {
   }
 };
 
-const addHandlerFullSizePictureEscapeKey = () => {
-  document.addEventListener('keydown', onFullSizePictureEscKeydown);
-};
-
-const removeHandlerFullSizePictureEscapeKey = () => {
-  document.removeEventListener('keydown', onFullSizePictureEscKeydown);
-};
-
 const createComments = (picture) => {
-  const commentsFragment = document.createDocumentFragment();
+  socialComments.innerHTML = '';
+  const fragment = document.createDocumentFragment();
   for (let i = 0; i < picture.length; i++) {
-    const commentContainer = document.createElement('li');
-    commentContainer.classList.add('social__comment');
-    commentContainer.innerHTML = `<img class="social__picture" src="${picture[i].avatar}" alt="${picture[i].name}" width="35" height="35"><p class="social__text">${picture[i].message}</p>`;
-    commentsFragment.appendChild(commentContainer);
+    const element = socialComment.cloneNode(true);
+    element.querySelector('.social__picture').src = picture[i].avatar;
+    element.querySelector('.social__picture').alt = picture[i].name;
+    element.querySelector('.social__text').textContent = picture[i].message;
+    fragment.appendChild(element);
   }
-  socialComments.appendChild(commentsFragment);
+  socialComments.appendChild(fragment);
 };
 
 const openFullSizePicture = (picture) => {
@@ -46,20 +41,19 @@ const openFullSizePicture = (picture) => {
   socialCommentsCount.classList.add('hidden');
   commentsLoaderButton.classList.add('hidden');
   document.body.classList.add('modal-open');
-
-  addHandlerFullSizePictureEscapeKey();
+  document.addEventListener('keydown', onFullSizePictureEscKeydown);
   createComments(picture.comments);
   pictureCancelButton.addEventListener('click', () => {
     closeFullSizePicture();
   });
 };
 
-function closeFullSizePicture () {
+function closeFullSizePicture() {
   bigPicture.classList.add('hidden');
   socialCommentsCount.classList.remove('hidden');
   commentsLoaderButton.classList.remove('hidden');
   document.body.classList.remove('modal-open');
-  removeHandlerFullSizePictureEscapeKey();
+  document.removeEventListener('keydown', onFullSizePictureEscKeydown);
 }
 
 export {openFullSizePicture};
