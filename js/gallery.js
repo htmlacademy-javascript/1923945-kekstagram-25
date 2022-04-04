@@ -1,4 +1,4 @@
-import {openFullSizePicture} from './full-size-image.js';
+import {getPictureData} from './full-size-image.js';
 
 const usersGalleryItem = document.querySelector('.pictures');
 const usersGalleryItemTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -11,7 +11,7 @@ const createRecentUsersGalleryItem = (recentUsersGalleryItem) => {
     usersGalleryElement.querySelector('.picture__likes').textContent = element.likes;
     usersGalleryElement.querySelector('.picture__comments').textContent = element.comments.length;
     usersGalleryElement.addEventListener('click', () => {
-      openFullSizePicture(element);
+      getPictureData(element);
     });
     usersGalleryItemFragment.appendChild(usersGalleryElement);
   });
