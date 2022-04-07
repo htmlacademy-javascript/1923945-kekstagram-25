@@ -28,6 +28,8 @@ const createRecentUsersGalleryItem = (recentUsersGalleryItem) => {
   usersGalleryItem.appendChild(usersGalleryItemFragment);
 };
 
+const getSortCommentsAsc = (imagePrevious, imageNext) => imageNext.comments.length - imagePrevious.comments.length;
+
 const setFilter = (data, cb) => {
   imageFiltersForm.addEventListener('click', (evt) => {
     imageFiltersForm.querySelectorAll('.img-filters__button').forEach((element) => element.classList.remove('img-filters__button--active'));
@@ -45,9 +47,5 @@ const setFilter = (data, cb) => {
     }
   });
 };
-
-function getSortCommentsAsc(a, b) {
-  return b.comments.length - a.comments.length;
-}
 
 export {createRecentUsersGalleryItem, setFilter};
