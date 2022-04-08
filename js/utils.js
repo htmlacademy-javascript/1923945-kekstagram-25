@@ -1,13 +1,3 @@
-const getRandomNumber = (min, max) => {
-  if (min >= 0 && max > min) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-};
-
-const getMaxLengthString = (verifiableString, maxLength) => verifiableString.length < maxLength;
-
 const getShuffleArray = (arr) => {
   const shuffleArray = arr.slice();
   let j, temp;
@@ -22,8 +12,6 @@ const getShuffleArray = (arr) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
-
 const getArrayFromString = (string) => {
   const stringValue = string.replace(/ +/g, ' ').trim().toLocaleLowerCase();
   return stringValue.split(' ');
@@ -31,8 +19,8 @@ const getArrayFromString = (string) => {
 
 const getLongestWordInArray = (arr) => {
   let longestWord = 0;
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i].length > longestWord){
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].length > longestWord) {
       longestWord = arr[i].length;
     }
   }
@@ -47,14 +35,26 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
+const openMessageError = (message) => {
+  const element = document.createElement('p');
+  element.textContent = message;
+  element.style.color = '#ffffff';
+  element.style.background = 'red';
+  element.style.display = 'grid';
+  element.style.placeContent = 'center';
+  element.style.position = 'fixed';
+  element.style.width = '100%';
+  element.style.top = '0';
+  element.style.height = '3em';
+  element.style.zIndex = '3';
+  document.body.append(element);
+};
+
 export {
-  getRandomNumber,
-  getMaxLengthString,
   getShuffleArray,
-  getRandomArrayElement,
   isEscapeKey,
   getArrayFromString,
   getLongestWordInArray,
-  debounce
+  debounce,
+  openMessageError
 };
-

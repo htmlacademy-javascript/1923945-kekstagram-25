@@ -1,5 +1,5 @@
 import {isEscapeKey} from './utils.js';
-import {getDefaultScale} from './scale-image.js';
+import {getDefaultScale, getImagePreview, previewImage} from './scale-image.js';
 import {getDefaultEffects} from './effect-image.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -20,6 +20,7 @@ const onUserFormEscKeydown = (evt) => {
 
 //обработчик открытия формы после выбора файла
 inputFile.addEventListener('change', () => {
+  getImagePreview(inputFile.files[0]);
   openForm();
 });
 
@@ -63,7 +64,7 @@ function closeForm() {
   descriptionInput.value = '';
   getDefaultScale();
   getDefaultEffects();
+  previewImage.src = '';
 }
 
 export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton, unblockSubmitButton, addHandlerUserFormEscapeKey, removeHandlerUserFormEscapeKey};
-

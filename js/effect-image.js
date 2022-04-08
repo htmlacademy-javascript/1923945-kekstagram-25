@@ -85,7 +85,7 @@ const BRIGHTNESS_EFFECT_SLIDER_PARAMETERS = {
 
 const effectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const effectList = document.querySelector('.effects__list');
-const previewImage = document.querySelector('.img-upload__preview');
+const previewImage = document.querySelector('.img-upload__preview img');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effectStyleNoneInput = document.querySelector('#effect-none');

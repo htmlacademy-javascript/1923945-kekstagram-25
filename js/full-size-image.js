@@ -28,6 +28,11 @@ const createComments = (comments) => {
   if (showComments > comments.length) {
     showComments = comments.length;
   }
+  if (showComments === comments.length) {
+    commentsLoaderButton.classList.add('hidden');
+  } else {
+    commentsLoaderButton.classList.remove('hidden');
+  }
   socialCommentsCount.innerHTML = '';
   socialCommentsCount.innerHTML = `${showComments} из <span class="comments-count">${comments.length}</span> комментариев`;
   socialComments.innerHTML = '';
