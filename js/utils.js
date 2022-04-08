@@ -9,14 +9,15 @@ const getRandomNumber = (min, max) => {
 const getMaxLengthString = (verifiableString, maxLength) => verifiableString.length < maxLength;
 
 const getShuffleArray = (arr) => {
+  const shuffleArray = arr.slice();
   let j, temp;
-  for(let i = arr.length - 1; i > 0; i--){
-    j = Math.floor(Math.random()*(i + 1));
-    temp = arr[j];
-    arr[j] = arr[i];
-    arr[i] = temp;
+  for (let i = shuffleArray.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = shuffleArray[j];
+    shuffleArray[j] = shuffleArray[i];
+    shuffleArray[i] = temp;
   }
-  return arr;
+  return shuffleArray;
 };
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
@@ -38,5 +39,22 @@ const getLongestWordInArray = (arr) => {
   return longestWord;
 };
 
-export {getRandomNumber, getMaxLengthString, getShuffleArray, getRandomArrayElement, isEscapeKey, getArrayFromString, getLongestWordInArray};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {
+  getRandomNumber,
+  getMaxLengthString,
+  getShuffleArray,
+  getRandomArrayElement,
+  isEscapeKey,
+  getArrayFromString,
+  getLongestWordInArray,
+  debounce
+};
 
