@@ -2,11 +2,12 @@ const SCALE_STEP = 25;
 const MAX_SCALE = 100;
 const MIN_SCALE = 25;
 const DEFAULT_SCALE = 100;
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const scaleSmallerButton = document.querySelector('.scale__control--smaller');
 const scaleBiggerButton = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
-const previewImage = document.querySelector('.img-upload__preview');
+const previewImage = document.querySelector('.img-upload__preview img');
 let scale = DEFAULT_SCALE;
 
 scaleSmallerButton.addEventListener('click', () => {
@@ -33,4 +34,13 @@ const getDefaultScale = () => {
   getAssignmentScale(scale);
 };
 
-export {getDefaultScale};
+const getImagePreview = (files) => {
+  const file = files;
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    previewImage.src = URL.createObjectURL(file);
+  }
+};
+
+export {getDefaultScale, getImagePreview, previewImage};
