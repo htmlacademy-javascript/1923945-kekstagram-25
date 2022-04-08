@@ -46,4 +46,4 @@ descriptionInput.addEventListener('input', () => {
   symbolsCounter.textContent = descriptionInput.value.length;
 });
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, symbolsCounter};

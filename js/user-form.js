@@ -1,6 +1,7 @@
 import {isEscapeKey} from './utils.js';
 import {getDefaultScale, getImagePreview, previewImage} from './scale-image.js';
 import {getDefaultEffects} from './effect-image.js';
+import {symbolsCounter} from './validate-form.js';
 
 const form = document.querySelector('.img-upload__form');
 const inputFile = form.querySelector('.img-upload__input');
@@ -65,6 +66,7 @@ function closeForm() {
   getDefaultScale();
   getDefaultEffects();
   previewImage.src = '';
+  symbolsCounter.textContent = 0;
 }
 
 export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton, unblockSubmitButton, addHandlerUserFormEscapeKey, removeHandlerUserFormEscapeKey};
