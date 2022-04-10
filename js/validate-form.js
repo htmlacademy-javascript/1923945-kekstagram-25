@@ -4,14 +4,20 @@ import {sendData} from './data.js';
 
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_QUANTITY = 5;
+const HASHTAG_PATTERN = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
-const hashtagPattern = /^(#[A-Za-zА-Яа-яЁё0-9]+[\s+]*)*$/;
 const symbolsCounter = document.querySelector('.symbols-counter');
 
-const getHashtagPatternConformity = () => hashtagPattern.test(hashtagInput.value);
-const getHashtagRepeat = () => getArrayFromString(hashtagInput.value).length === new Set((getArrayFromString(hashtagInput.value))).size;
-const getHashtagQuantity = () => new Set((getArrayFromString(hashtagInput.value))).size <= MAX_HASHTAG_QUANTITY;
-const getHashtagLength = () => getLongestWordInArray((getArrayFromString(hashtagInput.value))) <= MAX_HASHTAG_LENGTH;
+const getHashtagPatternConformity = (value) => {
+  if (value.length > 0) {
+    return value.split(' ').every((element) => HASHTAG_PATTERN.test(element));
+  }
+  return true;
+};
+
+const getHashtagRepeat = (value) => getArrayFromString(value).length === new Set((getArrayFromString(value))).size;
+const getHashtagQuantity = (value) => new Set((getArrayFromString(value))).size <= MAX_HASHTAG_QUANTITY;
+const getHashtagLength = (value) => getLongestWordInArray((getArrayFromString(value))) <= MAX_HASHTAG_LENGTH;
 
 const pristine = new Pristine(form, {classTo: 'img-upload__text-field', errorTextParent: 'img-upload__text-field'});
 
