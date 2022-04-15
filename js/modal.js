@@ -1,16 +1,15 @@
 import {isEscapeKey} from './utils.js';
 import {addHandlerUserFormEscapeKey} from './user-form.js';
 
-const onModalSuccessEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    closeModalSuccess();
-  }
+const closeModalSuccess = () => {
+  document.body.removeChild(document.body.lastElementChild);
+  document.removeEventListener('keydown', onModalSuccessEscKeydown);
 };
 
-const onModalErrorEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    closeModalError();
-  }
+const closeModalError = () => {
+  document.body.removeChild(document.body.lastElementChild);
+  document.removeEventListener('keydown', onModalErrorEscKeydown);
+  addHandlerUserFormEscapeKey();
 };
 
 const openModalSuccess = () => {
@@ -53,16 +52,16 @@ const openModalError = () => {
   });
 };
 
-function closeModalSuccess () {
-  document.body.removeChild(document.body.lastElementChild);
-  document.removeEventListener('keydown', onModalSuccessEscKeydown);
+function onModalSuccessEscKeydown (evt) {
+  if (isEscapeKey(evt)) {
+    closeModalSuccess();
+  }
 }
 
-function closeModalError () {
-  document.body.removeChild(document.body.lastElementChild);
-  document.removeEventListener('keydown', onModalErrorEscKeydown);
-  addHandlerUserFormEscapeKey();
+function onModalErrorEscKeydown (evt) {
+  if (isEscapeKey(evt)) {
+    closeModalError();
+  }
 }
-
 
 export {openModalSuccess, openModalError};

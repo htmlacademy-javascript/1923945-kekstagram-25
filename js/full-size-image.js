@@ -16,14 +16,6 @@ const socialComment = socialComments.querySelector('.social__comment');
 
 let pictureData;
 
-const onFullSizePictureEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    closeFullSizePicture();
-  }
-};
-
-const onClickButtonClosePicture = () => closeFullSizePicture();
-
 let showComments = COMMENTS_QUANTITY_MULTIPLE;
 
 const createComments = (comments) => {
@@ -68,13 +60,23 @@ const getPictureData = (data) => {
   openFullSizePicture(data);
 };
 
-function closeFullSizePicture() {
+const closeFullSizePicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onFullSizePictureEscKeydown);
   commentsLoaderButton.removeEventListener('click', onClickButtonShowMore);
   pictureCancelButton.removeEventListener('click', onClickButtonClosePicture);
   showComments = COMMENTS_QUANTITY_MULTIPLE;
+};
+
+function onClickButtonClosePicture () {
+  closeFullSizePicture();
+}
+
+function onFullSizePictureEscKeydown (evt) {
+  if (isEscapeKey(evt)) {
+    closeFullSizePicture();
+  }
 }
 
 function onClickButtonShowMore () {

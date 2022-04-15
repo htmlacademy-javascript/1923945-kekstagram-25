@@ -10,6 +10,11 @@ const scaleValue = document.querySelector('.scale__control--value');
 const previewImage = document.querySelector('.img-upload__preview img');
 let scale = DEFAULT_SCALE;
 
+const getAssignmentScale = (value) => {
+  scaleValue.value = `${value}%`;
+  previewImage.style.transform = `scale(${value / 100})`;
+};
+
 scaleSmallerButton.addEventListener('click', () => {
   if (scale > MIN_SCALE) {
     scale -= SCALE_STEP;
@@ -23,11 +28,6 @@ scaleBiggerButton.addEventListener('click', () => {
     getAssignmentScale(scale);
   }
 });
-
-function getAssignmentScale(value) {
-  scaleValue.value = `${value}%`;
-  previewImage.style.transform = `scale(${value / 100})`;
-}
 
 const getDefaultScale = () => {
   scale = DEFAULT_SCALE;
