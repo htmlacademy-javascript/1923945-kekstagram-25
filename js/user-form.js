@@ -11,35 +11,6 @@ const hashtagInput = form.querySelector('.text__hashtags');
 const descriptionInput = form.querySelector('.text__description');
 const submitButton = form.querySelector('.img-upload__submit');
 
-//отключение закрытия формы по ESC при фокусе на хэштеге или на комментарии
-const onUserFormEscKeydown = (evt) => {
-  if (isEscapeKey(evt) && document.activeElement !== hashtagInput && document.activeElement !== descriptionInput) {
-    evt.preventDefault();
-    closeForm();
-  }
-};
-
-//обработчик открытия формы после выбора файла
-inputFile.addEventListener('change', () => {
-  getImagePreview(inputFile.files[0]);
-  openForm();
-});
-
-//обработчик закрытия формы по клику на иконку
-closeButton.addEventListener('click', () => {
-  closeForm();
-});
-
-//Функция добавления обработчика закрытие формы по ESC
-const addHandlerUserFormEscapeKey = () => {
-  document.addEventListener('keydown', onUserFormEscKeydown);
-};
-
-//Функция удаления обработчика закрытие формы по ESC
-const removeHandlerUserFormEscapeKey = () => {
-  document.removeEventListener('keydown', onUserFormEscKeydown);
-};
-
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Отправляю...';
@@ -50,13 +21,21 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-function openForm() {
+const addHandlerUserFormEscapeKey = () => {
+  document.addEventListener('keydown', onUserFormEscKeydown);
+};
+
+const removeHandlerUserFormEscapeKey = () => {
+  document.removeEventListener('keydown', onUserFormEscKeydown);
+};
+
+const openForm = () => {
   imageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   addHandlerUserFormEscapeKey();
-}
+};
 
-function closeForm() {
+const closeForm = () => {
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   removeHandlerUserFormEscapeKey();
@@ -67,6 +46,22 @@ function closeForm() {
   getDefaultEffects();
   previewImage.src = '';
   symbolsCounter.textContent = 0;
+};
+
+function onUserFormEscKeydown (evt) {
+  if (isEscapeKey(evt) && document.activeElement !== hashtagInput && document.activeElement !== descriptionInput) {
+    evt.preventDefault();
+    closeForm();
+  }
 }
+
+inputFile.addEventListener('change', () => {
+  getImagePreview(inputFile.files[0]);
+  openForm();
+});
+
+closeButton.addEventListener('click', () => {
+  closeForm();
+});
 
 export {form, hashtagInput, descriptionInput, closeForm, blockSubmitButton, unblockSubmitButton, addHandlerUserFormEscapeKey, removeHandlerUserFormEscapeKey};

@@ -18,13 +18,13 @@ const getArrayFromString = (string) => {
 };
 
 const getLongestWordInArray = (arr) => {
-  let longestWord = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].length > longestWord) {
-      longestWord = arr[i].length;
+  let longestWordSymbols = 0;
+  arr.forEach((word) => {
+    if (word.length > longestWordSymbols) {
+      longestWordSymbols = word.length;
     }
-  }
-  return longestWord;
+  });
+  return longestWordSymbols;
 };
 
 const debounce = (callback, timeoutDelay) => {
