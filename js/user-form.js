@@ -11,6 +11,13 @@ const hashtagInput = form.querySelector('.text__hashtags');
 const descriptionInput = form.querySelector('.text__description');
 const submitButton = form.querySelector('.img-upload__submit');
 
+const onUserFormEscKeydown = (evt) => {
+  if (isEscapeKey(evt) && document.activeElement !== hashtagInput && document.activeElement !== descriptionInput) {
+    evt.preventDefault();
+    closeForm();
+  }
+};
+
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Отправляю...';
@@ -35,7 +42,7 @@ const openForm = () => {
   addHandlerUserFormEscapeKey();
 };
 
-const closeForm = () => {
+function closeForm () {
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   removeHandlerUserFormEscapeKey();
@@ -46,13 +53,6 @@ const closeForm = () => {
   getDefaultEffects();
   previewImage.src = '';
   symbolsCounter.textContent = 0;
-};
-
-function onUserFormEscKeydown (evt) {
-  if (isEscapeKey(evt) && document.activeElement !== hashtagInput && document.activeElement !== descriptionInput) {
-    evt.preventDefault();
-    closeForm();
-  }
 }
 
 inputFile.addEventListener('change', () => {

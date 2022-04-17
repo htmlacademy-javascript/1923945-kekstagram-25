@@ -18,6 +18,16 @@ let pictureData;
 
 let showComments = COMMENTS_QUANTITY_MULTIPLE;
 
+const onClickButtonClosePicture = () => {
+  closeFullSizePicture();
+};
+
+const onFullSizePictureEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    closeFullSizePicture();
+  }
+};
+
 const createComments = (comments) => {
   if (showComments > comments.length) {
     showComments = comments.length;
@@ -41,6 +51,15 @@ const createComments = (comments) => {
   socialComments.appendChild(fragment);
 };
 
+const onClickButtonShowMore = () => {
+  if (showComments + COMMENTS_QUANTITY_MULTIPLE < pictureData.comments.length) {
+    showComments = showComments + COMMENTS_QUANTITY_MULTIPLE;
+  } else {
+    showComments = pictureData.comments.length;
+  }
+  createComments(pictureData.comments);
+};
+
 const openFullSizePicture = (picture) => {
   fullPicture.src = picture.url;
   fullPicture.alt = 'фотография';
@@ -60,32 +79,13 @@ const getPictureData = (data) => {
   openFullSizePicture(data);
 };
 
-const closeFullSizePicture = () => {
+function closeFullSizePicture () {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onFullSizePictureEscKeydown);
   commentsLoaderButton.removeEventListener('click', onClickButtonShowMore);
   pictureCancelButton.removeEventListener('click', onClickButtonClosePicture);
   showComments = COMMENTS_QUANTITY_MULTIPLE;
-};
-
-function onClickButtonClosePicture () {
-  closeFullSizePicture();
-}
-
-function onFullSizePictureEscKeydown (evt) {
-  if (isEscapeKey(evt)) {
-    closeFullSizePicture();
-  }
-}
-
-function onClickButtonShowMore () {
-  if (showComments + COMMENTS_QUANTITY_MULTIPLE < pictureData.comments.length) {
-    showComments = showComments + COMMENTS_QUANTITY_MULTIPLE;
-  } else {
-    showComments = pictureData.comments.length;
-  }
-  createComments(pictureData.comments);
 }
 
 export {getPictureData};
